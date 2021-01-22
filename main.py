@@ -1,7 +1,7 @@
 # packages import
 import numpy as np
 import pandas as pd
-
+import math
 """
 Function definitions
 """
@@ -47,5 +47,25 @@ while i <= len(initial_data):
 print("-"*15, "Fitted Cumulative", "-"*15)
 print(initial_data)
 # Fitted incremental
-
+fitted_inc_data = initial_data.copy()
+for i, item in fitted_inc_data.iterrows():
+  for j in range(len(item)-1, 0, -1):
+    item[j] = item[j] - item[j-1]
+print("-"*15, "Fitted Incremental", "-"*15)
+print(fitted_inc_data)
+'''
+X: Valeur avant "Fitted Incremental"
+X~: Valeur apres "Fitted Incremental"
+r(i,j)=(X(i,j)-X~(i,j))/sqrt(X~(i,j))
+i+j<I
+'''
 # Pearson residuals
+pearson_resid_data = initial_data.copy()
+I = len(pearson_resid_data)
+for i, item in pearson_resid_data.iterrows():
+  # I = I - i
+  for j in range(I-1, -1, -1):
+    # if i+j < I:
+    item[j]=(item[j]-fitted_inc_data.iat[i, j])/math.sqrt(fitted_inc_data.iat[i, j])
+print("-"*15, "Pearson Residuals", "-"*15)
+print(pearson_resid_data)
