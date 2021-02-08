@@ -209,6 +209,9 @@ def bootstrap_iteration(debug):
     print(deviance_matrix)
   '''
   Quote: "an approximate chi-squared distribution with k-degrees of freedom. This can be used for hypothesis testing on the deviance."
+  ----------------
+  Le test de Chi-deux est utilisé pour tester l'hypothèse nulle d'absence de relation entre deux variables catégorielles. On peut également dire que ce test vérifie l'hypothèse d'indépendance de ces variables.
+  ===> i.i.d
   '''
   chi_sq = deviance_matrix.copy()
   chi_sq.applymap(chi_squared)
